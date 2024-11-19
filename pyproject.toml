@@ -1,0 +1,82 @@
+[project]
+name = "djinitializr"
+version = "0.1.0"
+description = "A Django Starter Project"
+authors = [{ name = "Macktireh", email = "abdimack97@gmail.com" }]
+requires-python = ">=3.12"
+readme = "README.md"
+license = { text = "MIT" }
+dependencies = [
+    "django>=5.1.2",
+    "djangorestframework>=3.15.2",
+    "django-environ>=0.11.2",
+    "gunicorn>=23.0.0",
+    "psycopg[binary]>=3.2.3",
+    "whitenoise>=6.8.2",
+]
+
+[dependency-groups]
+lint = ["pre-commit>=4.0.1", "ruff>=0.7.1"]
+
+
+[tool.pdm.scripts]
+newapp = "python src/manage.py startapp"
+makemigrations = "python src/manage.py makemigrations"
+migrate = "python src/manage.py migrate"
+dev = "python src/manage.py runserver"
+devcreatesuperuser = "python src/manage.py createsuperuser --email=admin@example.com --first_name=Admin --last_name=AD"
+createsuperuser = "python src/manage.py createsuperuser"
+collectstatic = "python src/manage.py collectstatic"
+loaddata = "python src/manage.py loaddata"
+rufffix = "ruff check --fix"
+ruffformat = "ruff format"
+ruffcheck = "ruff check"
+docker = "docker compose up --build"
+mmm = { composite = ["makemigrations", "migrate"] }
+ruff = { composite = ["ruffformat", "rufffix"] }
+
+
+[tool.pdm]
+distribution = false
+
+
+[tool.ruff]
+line-length = 110
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
